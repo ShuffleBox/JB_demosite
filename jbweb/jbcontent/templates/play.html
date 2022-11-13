@@ -1,0 +1,36 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>A Basic HTML5 Template</title>
+  <meta name="description" content="A simple HTML5 Template for new projects.">
+
+
+
+
+<!-- Dependencies -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+
+  <!-- CSS -->
+
+  <link rel="stylesheet" href="/static/build/ableplayer.min.css" type="text/css"/>
+</head>
+
+<body>
+  <!-- your content here... -->
+  <div><h1>{{ show.show_name }} - Episode: {{ episode.ep_title }} - Able Player </h1></div>
+
+<div>
+  <audio id="audio1" class="ump-media" data-able-player preload="auto" data-skin="2020" data-lyrics-mode data-transcript-title="Sing along!">
+    <source type="audio/mpeg" src="{{ episode.audio_link }}"/>
+    <track kind="subtitles" src="/media/{{ episode.vtt_link }}" srclang="en" label="English"/>
+  </audio>
+</div>
+
+  <script src="/static/build/ableplayer.min.js"></script>
+</body>
+</html>

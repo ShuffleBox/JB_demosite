@@ -1,0 +1,28 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>{{ show.show_name }} episode list</title>
+
+
+
+</head>
+
+<body>
+  <!-- your content here... -->
+  <div><h1>{{ show.show_name }} Episode List </h1></div>
+
+  <p>
+    <ul>
+      {% for episode in episodes %}
+      <li><a href="/{{ show.show_name }}/{{ episode.episode }}/">{{ episode.ep_title }}</a></li>
+      {% endfor %}
+    </ul>
+  </p>
+
+  <!--<script src="js/scripts.js"></script>-->
+</body>
+</html>

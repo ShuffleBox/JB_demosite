@@ -6,6 +6,10 @@ __pycache__/
 # C extensions
 *.so
 
+#django stuff
+/jbweb/static
+/jbweb/media
+
 # Distribution / packaging
 .Python
 build/

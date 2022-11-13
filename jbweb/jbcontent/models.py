@@ -6,12 +6,12 @@ class Show(models.Model):
     """
     show catchall
     """
-    show_name = models.SlugField(unique=True)  #get from payments.library.unt.edu
-    fancy_name = models.CharField(max_length=200)
-    fancy_description = models.CharField(max_length=250)
+    show_name = models.SlugField(unique=True)
+    fancy_name = models.CharField(max_length=200, default='verbose name of a show')
+    fancy_description = models.CharField(max_length=250, default='A description of a JB Show!')
 
     def __unicode__(self):
-        return str(self.account_name)
+        return str(self.show_name)
 
 class Episode(models.Model):
     """
@@ -23,5 +23,14 @@ class Episode(models.Model):
     summary = models.TextField()
     url_link = models.URLField()
     audio_link = models.URLField()
-    vtt_link = models.FileField(upload_to='vtt/')
+    vtt_link = models.FileField(upload_to='media/vtt/')
 
+    # we will want to check that the vtt exists so we can use that 
+    # to render our template correctly. This check is new to me
+    # so it will probably be dopey and broken at first.
+    def _vtt_exists(self):
+        return self.file.storage.exists(self.vtt_link)
+    vtt_exists = property(_vtt_exists)
+
+    def __unicode__(self):
+        return str(self.ep_title)
