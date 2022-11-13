@@ -22,10 +22,10 @@
 
 <body>
   <!-- your content here... -->
-  <div><h1>{{ show.show_name }} - Episode: {{ episode.ep_title }} - Able Player </h1></div>
+  <div><h1>{{ show.show_name }} - Episode: {{ episode.ep_title }} </h1></div>
 
 <div>
-  <audio id="audio1" class="ump-media" data-able-player preload="auto" data-skin="2020" data-lyrics-mode data-transcript-title="Sing along!">
+  <audio id="audio1" class="ump-media" data-able-player preload="auto" data-skin="2020" data-lyrics-mode data-transcript-title="{{ episode.ep_title }}">
     <source type="audio/mpeg" src="{{ episode.audio_link }}"/>
     <track kind="subtitles" src="/media/{{ episode.vtt_link }}" srclang="en" label="English"/>
   </audio>
