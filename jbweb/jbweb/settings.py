@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'haystack',
     'corsheaders',
     'crispy_forms',
     'jbcontent'
@@ -151,3 +152,14 @@ CRISPY_FAIL_SILENTLY = not DEBUG
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#Haystack Solr search stuff
+HAYSTACK_CONNECTIONS = {
+'default': {
+'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
+'URL': 'http://127.0.0.1:8983/solr/jbcontent', 
+'ADMIN_URL': 'http://127.0.0.1:8983/solr/admin/cores'
+# ...or for multicore...
+# 'URL': 'http://127.0.0.1:8983/solr/mysite',
+},
+}

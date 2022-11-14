@@ -20,6 +20,7 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('jbcontent.urls')),
+    path('search/', include('haystack.urls')),
 ]
 
 if settings.DEBUG:
