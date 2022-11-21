@@ -46,10 +46,10 @@ class EpisodePlayback(View):
     def get(self, request, show_title, episode_number):
         """
         """
-        #ipdb.set_trace()
+        
         jbshow = Show.objects.get(show_name=show_title)
         episode = Episode.objects.get(episode=episode_number, show=jbshow)
-        ipdb.set_trace()
+        
         return render(
             request,
             self.template,
