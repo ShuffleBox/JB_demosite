@@ -157,8 +157,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 HAYSTACK_CONNECTIONS = {
 'default': {
 'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
-'URL': 'http://127.0.0.1:8983/solr/jbcontent', 
-'ADMIN_URL': 'http://127.0.0.1:8983/solr/admin/cores'
+'URL': 'http://webfile01.rumohr.me:8983/solr/somejunk', 
+'ADMIN_URL': 'http://webfile01.rumohr.me:8983/solr/admin/cores',
+'TIMEOUT': 60 * 5,
 # ...or for multicore...
 # 'URL': 'http://127.0.0.1:8983/solr/mysite',
 },

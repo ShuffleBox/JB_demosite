@@ -50,12 +50,26 @@ class Command(BaseCommand):
                             'url_link': export_fields['url_link'],
                             'audio_link': export_fields['audio_link'],
                             'vtt_link': export_fields['vtt_file'],
+                            'transcript_link': export_fields['transcript_file']
                             #'' = export_fields[''],
                             #'' = export_fields[''],
                             
                         }
                     )
-                    print(episode.ep_title)
+                    setattr(episode,'ep_title',export_fields['ep_title'])
+                    setattr(episode,'summary',export_fields['summary'])
+                    setattr(episode,'url_link',export_fields['url_link'])
+                    setattr(episode,'audio_link',export_fields['audio_link'])
+                    setattr(episode,'vtt_link',export_fields['vtt_file'])
+                    setattr(episode,'transcript_link',export_fields['transcript_file'])
+                    
+                    episode.save()
+                    try:
+                        setattr(episode,'transcript',episode.transcript_link.open().read().decode('utf8'))
+                        episode.save()
+                    except:
+                        continue
+                    print(episode.ep_title + " - " + episode.transcript_link.url)
                     #ipdb.set_trace()
 '''
         for poll_id in options['poll_ids']:

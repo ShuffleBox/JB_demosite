@@ -24,13 +24,19 @@ class Episode(models.Model):
     url_link = models.URLField()
     audio_link = models.URLField()
     vtt_link = models.FileField(upload_to='media/vtt/')
-
+    transcript_link = models.FileField(upload_to='media/vtt/')
+    transcript = models.TextField()
+    
     # we will want to check that the vtt exists so we can use that 
     # to render our template correctly. This check is new to me
     # so it will probably be dopey and broken at first.
     def _vtt_exists(self):
         return self.file.storage.exists(self.vtt_link)
     vtt_exists = property(_vtt_exists)
+
+    def _transcript_exists(self):
+        return self.file.storage.exists(self.vtranscript_link)
+    transcript_exists = property(_transcript_exists)
 
     def __unicode__(self):
         return str(self.ep_title)

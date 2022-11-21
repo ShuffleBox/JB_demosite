@@ -9,6 +9,7 @@ __pycache__/
 #django stuff
 /jbweb/static
 /jbweb/media
+*.settings.json
 
 # Distribution / packaging
 .Python

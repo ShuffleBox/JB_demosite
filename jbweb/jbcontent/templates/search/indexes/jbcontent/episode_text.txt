@@ -1,3 +1,4 @@
 {{ object.ep_title }}
 {{ object.show.show_name}}
 {{ object.summary }}
+{{ object.transcript }}
