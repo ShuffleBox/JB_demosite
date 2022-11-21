@@ -1,0 +1,17 @@
+{
+    "SECRET_KEY": "somerandomthingsbutkeepitsecret",
+    "DATABASES":
+                  {
+                     "default":
+                         {
+                             "ENGINE": "django.db.backends.mysql",
+                             "NAME": "dbname",
+                             "USER": "dbuser",
+                             "PASSWORD": "dbpasswd",
+                             "HOST": "dbserver.fqdn",
+                             "PORT": "3306"
+                         }
+ 
+                  } 
+ }
+ 

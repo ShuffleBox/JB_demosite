@@ -1,0 +1,17 @@
+{
+    "SECRET_KEY": "c8625c4aad2af153cb91099e5d037bd9c8625c4aad2af153cb91099e5d037bd9",
+    "DATABASES":
+                  {
+                     "default":
+                         {
+                             "ENGINE": "django.db.backends.mysql",
+                             "NAME": "jbshows",
+                             "USER": "jbshowsusr",
+                             "PASSWORD": "1d20f03f826a30d702abf842e92ca861",
+                             "HOST": "127.0.0.1",
+                             "PORT": "3306"
+                         }
+ 
+                  } 
+ }
+ 

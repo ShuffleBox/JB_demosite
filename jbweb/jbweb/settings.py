@@ -10,28 +10,52 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
-
+import json
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+#BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+_SETTINGS_FILE = os.path.join(BASE_DIR, "jbweb/settings.json")
+with open(_SETTINGS_FILE) as f:
+    SETTINGS_FILE = json.loads(f.read())
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
+#ipdb.set_trace()
+def get_conf_variable(var_name):
+    try:
+        return SETTINGS_FILE[var_name]
+    except KeyError:
+        error_msg = "Set the {} environment variable".format(var_name)
+        raise ImproperlyConfigured(error_msg)
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-velb7u#g2he_$*ep$m&-&9t++==5ftrnfzyy747^k_7eea$1=w'
+SECRET_KEY = get_conf_variable('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#DEBUG = True
 
-ALLOWED_HOSTS = []
+# Quick-start development settings - unsuitable for production
+# See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
+
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = get_conf_variable('DEBUG')
+if DEBUG == "True":
+    DEBUG = True
+else:
+    DEBUG = False
+
+SECRET_KEY = get_conf_variable('SECRET_KEY')
+# SECURITY WARNING: don't run with debug turned on in production!
+
+ALLOWED_HOSTS = ['127.0.0.1',
+                 'jbshows.garretr.com',]
 
 CORS_ALLOW_ALL_ORIGINS: True
 CORS_ALLOWED_ORIGINS = [
     "https://media.fireside.fm",
-    "https://sub.example.com",
     "http://localhost:8080",
     "http://127.0.0.1:9000",
 ]
@@ -67,7 +91,7 @@ ROOT_URLCONF = 'jbweb.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -85,14 +109,15 @@ WSGI_APPLICATION = 'jbweb.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
+DATABASES = get_conf_variable('DATABASES')
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
+'''
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -138,10 +163,33 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     )
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'level': 'WARNING',
+            'filters': None,
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'WARNING',
+        },
+    },
+}
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 CRISPY_FAIL_SILENTLY = not DEBUG
 
+from django.contrib.messages import constants as message_constants
+MESSAGE_TAGS = {message_constants.DEBUG: 'debug',
+                message_constants.INFO: 'info',
+                message_constants.SUCCESS: 'success',
+                message_constants.WARNING: 'warning',
+                message_constants.ERROR: 'danger',}
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
