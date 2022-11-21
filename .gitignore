@@ -6,11 +6,6 @@ __pycache__/
 # C extensions
 *.so
 
-#django stuff
-/jbweb/static
-/jbweb/media
-*.settings.json
-
 # Distribution / packaging
 .Python
 build/
@@ -65,6 +60,9 @@ coverage.xml
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
+/jbweb/static
+/jbweb/media
+jbweb/settings.json
 
 # Flask stuff:
 instance/
