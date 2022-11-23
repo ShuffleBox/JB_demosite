@@ -30,12 +30,12 @@ class Episode(models.Model):
     # we will want to check that the vtt exists so we can use that 
     # to render our template correctly. This check is new to me
     # so it will probably be dopey and broken at first.
-    def _vtt_exists(self):
-        return self.file.storage.exists(self.vtt_link)
+    def _vtt_exists(self): 
+        return self.vtt_link.storage.exists(self.vtt_link.name)
     vtt_exists = property(_vtt_exists)
 
     def _transcript_exists(self):
-        return self.file.storage.exists(self.vtranscript_link)
+        return self.transcript_link.storage.exists(self.transcript_link.name)
     transcript_exists = property(_transcript_exists)
 
     def __unicode__(self):

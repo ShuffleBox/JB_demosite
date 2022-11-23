@@ -28,13 +28,19 @@ class ShowContents(View):
         """
         """
         show = Show.objects.get(show_name=show_title)
-        episodes = show.episode_set.all()
-        #ipdb.set_trace()
+        episode_set = show.episode_set.all()
+        #this has to be an expensive way to filter for file presence
+        #we should probably just put it in the DB
+        episode_list = []
+        for episode in episode_set:
+            if episode.vtt_exists:
+                episode_list.append(episode)
+        
         return render(
             request,
             self.template,
             {
-                'episodes': episodes,
+                'episodes': episode_list,
                 'show': show,
             },
         )
