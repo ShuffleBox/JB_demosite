@@ -63,7 +63,7 @@ db.sqlite3-journal
 settings.json
 /jbweb/static
 /jbweb/media
-/jbweb/jbweb/settings.json
+jbweb/jbweb/settings.json
 
 # Flask stuff:
 instance/
