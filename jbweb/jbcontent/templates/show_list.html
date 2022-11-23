@@ -36,7 +36,7 @@
         <h2>{{ show.show_name |upper }} </h2>
       <ul class="list-group">
         {% for episode in episodes %}
-        <button type="button" class="list-group-item list-group-item-action"><a href="/{{ show.show_name }}/{{ episode.episode }}/">{{ episode.ep_title }}</a></button>
+        <a href="/{{ show.show_name }}/{{ episode.episode }}/"><button type="button" class="list-group-item list-group-item-action">{{ episode.ep_title }}</button></a>
           {% endfor %}
         
       </div>

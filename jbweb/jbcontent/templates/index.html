@@ -33,7 +33,7 @@
         
       <ul class="list-group">
         {% for show in shows %}
-        <button type="button" class="list-group-item list-group-item-action"><a href="/{{ show.show_name}}/">{{ show.show_name }}</a></button>
+        <a href="/{{ show.show_name}}/"><button type="button" class="list-group-item list-group-item-action">{{ show.show_name }}</button></a>
           {% endfor %}
         
       </div>
