@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import View
 
 from .models import Episode, Show
@@ -41,7 +41,7 @@ class ShowContents(View):
     def get(self, request, show_title):
         """
         """
-        show = Show.objects.get(show_name=show_title)
+        show = get_object_or_404(Show, show_name=show_title)
         episode_set = show.episode_set.all()
         #this has to be an expensive way to filter for file presence
         #we should probably just put it in the DB
@@ -67,8 +67,8 @@ class EpisodePlayback(View):
         """
         """
         
-        jbshow = Show.objects.get(show_name=show_title)
-        episode = Episode.objects.get(episode=episode_number, show=jbshow)
+        jbshow = get_object_or_404(Show, show_name=show_title)
+        episode = get_object_or_404(Episode, episode=episode_number, show=jbshow)
         
         return render(
             request,
