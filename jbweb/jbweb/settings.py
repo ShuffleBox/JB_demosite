@@ -204,5 +204,13 @@ MESSAGE_TAGS = {message_constants.DEBUG: 'debug',
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #Haystack Solr search stuff
-HAYSTACK_CONNECTIONS = get_conf_variable('HAYSTACK_CONNECTIONS')
+#HAYSTACK_CONNECTIONS = get_conf_variable('HAYSTACK_CONNECTIONS')
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(BASE_DIR, 'whoosh_index'),
+    },
+}
+
 

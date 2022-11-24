@@ -134,3 +134,7 @@ dmypy.json
 
 jbweb/jbweb/settings.json
 jbweb/jbwebdb.sqlite3
+jbweb/jbweb/whoosh_index/_MAIN_2.toc
+jbweb/jbweb/whoosh_index/MAIN_3ay1efbnlwczpe3z.seg
+jbweb/jbweb/whoosh_index/MAIN_si0maueqbp3g5nz7.seg
+jbweb/jbweb/whoosh_index/MAIN_WRITELOCK

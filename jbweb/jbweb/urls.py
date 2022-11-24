@@ -19,8 +19,9 @@ from django.conf.urls.static import static
 from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('jbcontent.urls')),
     path('search/', include('haystack.urls')),
+    path('', include('jbcontent.urls')),
+    
 ]
 
 if settings.DEBUG:

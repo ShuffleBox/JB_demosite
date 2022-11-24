@@ -40,3 +40,7 @@ class Episode(models.Model):
 
     def __unicode__(self):
         return str(self.ep_title)
+
+    def _play_url(self):
+        return '/'+ str(self.show.show_name) + '/' + str(self.episode)
+    play_url = property(_play_url)

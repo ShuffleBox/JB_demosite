@@ -1,3 +1,4 @@
+{% load crispy_forms_tags %}
 <!doctype html>
 
 <html lang="en">
@@ -23,6 +24,11 @@
     <div class="row bg-light bg-darken-sm">
       <nav class="navbar navbar-light bg-black">
         <a class="navbar-brand text-white" href="/">Jupiter Broadcasting Shows</a>
+        <form action="/" method="post">
+          {% csrf_token %}
+          {{ search_form }}
+          <input type="submit" value="Search">
+        </form>
       </nav>
     </div>
   </div>

@@ -1,7 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import View
 
 from .models import Episode, Show
+from .forms import SearchForm
+
 import ipdb
 
 class Landing(View):
@@ -11,14 +13,26 @@ class Landing(View):
     def get(self, request):
         """
         """
+        search_form = SearchForm()
         shows = Show.objects.all()
         return render(
             request,
             self.template,
             {
                 'shows': shows,
+                'search_form': search_form
             },
         )
+    def post(self, request):
+        """
+        """
+        search_form = SearchForm(request.POST)
+        
+        if search_form.is_valid():
+            #ipdb.set_trace()
+            forward_url = '/search/?q=' + search_form.cleaned_data['q'] + '&models=jbcontent.episode'
+            return redirect(forward_url)
+
 
 class ShowContents(View):
     """

@@ -1,0 +1,90 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>{{ show.show_name }} - Episode: {{ episode.ep_title }} playback</title>
+  <meta name="description" content="{{ show.show_name }} - Episode: {{ episode.ep_title }} playback">
+
+
+
+
+<!-- Dependencies -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+
+  <!-- CSS -->
+
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <link rel="stylesheet" href="/static/build/ableplayer.min.css" type="text/css"/>
+  <style>
+    .bodybackground{
+      background-color: #222831;
+    }
+    .able-transcript{
+      color: black;
+    }
+    .able-audio{
+      padding-bottom: 1em;
+    }
+  </style>
+
+</head>
+
+<body class="bg-black">
+
+  <div class="container bg-text-white">
+    <div class="row bg-light bg-darken-sm">
+      <nav class="navbar navbar-light bg-black">
+        <a class="navbar-brand text-white" href="/">Jupiter Broadcasting Shows</a>
+        <span class="navbar-item text-white">Search</span>
+      </nav>
+    </div>
+  </div>
+    <!-- your content here... -->
+    <div class="container bodybackground text-white">
+        <div class="row">
+            <div class="">
+            <h1>{{ show.show_name | upper }} - Episode: {{ episode.ep_title }} </h1>
+            </div>
+    <form method="get" action=".">
+        <table>
+            {{ form.as_table }}
+            <tr>
+                <td>&nbsp;</td>
+                <td>
+                    <input type="submit" value="Search">
+                </td>
+            </tr>
+        </table>
+
+        {% if query %}
+            <h3>Results</h3>
+            
+            {% for result in page.object_list %}
+                <p>
+                    <a href="{{ result.object.play_url }}">{{ result.object.show.show_name |upper }} - {{ result.object.ep_title }}</a> - Search Score: {{ result.score | truncatechars:4}}<br>
+                    {{ result.object.summary |truncatechars:255}}
+                </p>
+            {% empty %}
+                <p>No results found.</p>
+            {% endfor %}
+
+            {% if page.has_previous or page.has_next %}
+                <div>
+                    {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
+                    |
+                    {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
+                </div>
+            {% endif %}
+        {% else %}
+            {# Show some example queries to run, maybe query syntax, something else? #}
+        {% endif %}
+    </form>
+    </div>
+    </div>
+</body>
+</html>
